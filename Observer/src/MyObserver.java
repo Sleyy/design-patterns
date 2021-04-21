@@ -1,9 +1,21 @@
 
-public class MyObserver implements Observer {
+public class MyObserver<T> implements Observer<T> {
+	
+	private Subject<T> subj;
+	
+	@Override
+	public void update() {
+		System.out.println("The new state is: " + subj.getState());
+	}
 
 	@Override
-	public void update(Subject subj) {
-		System.out.println("The magic number is: " + subj.getState());
+	public void setSubj(Subject<T> subj) {
+		this.subj = subj;
+	}
+
+	@Override
+	public void unsubscribe() {
+		this.subj.removeObserver(this);
 	}
 
 }

@@ -1,13 +1,13 @@
 
-public interface Subject {
+public interface Subject<T> {
 
-	void addObserver(Observer obs);
+	void addObserver(Observer<T> obs);
 	
-	void removeObserver(Observer obs);
+	void removeObserver(Observer<T> obs);
 	
 	void notifyObservers();
 	
-	void setState(Integer number);
+	T getState();
 	
-	Integer getState();
+	void setState(T obj);
 }

@@ -1,39 +1,40 @@
 import java.util.ArrayList;
 
-public class MySubject implements Subject {
+public class MySubject<T> implements Subject<T> {
 
-	private ArrayList<Observer> observers;
-	private Integer number;
+	private ArrayList<Observer<T>> observers;
+	private T stateObj;
 
 	public MySubject() {
-		this.observers = new ArrayList<Observer>();
+		this.observers = new ArrayList<Observer<T>>();
 	}
 
 	@Override
-	public void addObserver(Observer obs) {
+	public void addObserver(Observer<T> obs) {
 		this.observers.add(obs);
+		obs.setSubj(this);
 	}
 
 	@Override
-	public void removeObserver(Observer obs) {
+	public void removeObserver(Observer<T> obs) {
 		this.observers.remove(obs);
 	}
 
 	@Override
 	public void notifyObservers() {
-		for (Observer obs : this.observers) {
-			obs.update(this);
+		for (Observer<T> obs : this.observers) {
+			obs.update();
 		}
 	}
 
 	@Override
-	public Integer getState() {
-		return this.number;
+	public T getState() {
+		return this.stateObj;
 	}
 
 	@Override
-	public void setState(Integer num) {
-		this.number = num;
+	public void setState(T obj) {
+		this.stateObj = obj;
 		this.notifyObservers();
 	}
 

@@ -1,6 +1,10 @@
 
-public interface Observer {
+public interface Observer<T> {
 
-	void update(Subject subj);
+	void update();
+	
+	void setSubj(Subject<T> subj);
+	
+	void unsubscribe();
 	
 }
